@@ -66,11 +66,21 @@ export default function GameScreen() {
   async function loadPuzzle() {
     const level: Level = (levelParam as Level) ?? 'easy';
     const played = await getPlayedGames();
-    let index = puzzleIdParam
-      ? parseInt(puzzleIdParam.split('.')[1], 10)
-      : 1;
 
-    while (played.has(`${LEVEL_CONFIG[level].code}.${index}`)) index++;
+    if (puzzleIdParam) {
+      const p = generatePuzzle(puzzleIdParam, level);
+      startGame(p);
+      return;
+    }
+
+    // Pick a random unplayed index in range [1, 1000]
+    const POOL = 1000;
+    let index = Math.floor(Math.random() * POOL) + 1;
+    const start = index;
+    while (played.has(`${LEVEL_CONFIG[level].code}.${index}`)) {
+      index = (index % POOL) + 1;
+      if (index === start) break; // all played, wrap around
+    }
     const pid = `${LEVEL_CONFIG[level].code}.${index}`;
     const p = generatePuzzle(pid, level);
     startGame(p);
