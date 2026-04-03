@@ -34,7 +34,7 @@ const config: ExpoConfig = {
     facebookAppId: process.env.FACEBOOK_APP_ID ?? "",
     apiBaseUrl: process.env.API_BASE_URL ?? "",
     eas: {
-      projectId: process.env.EAS_PROJECT_ID ?? "",
+      projectId: "5580a1d3-7126-4660-b075-5a69948f4022",
     },
   },
 };

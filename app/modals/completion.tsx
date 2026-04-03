@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { ThemedBackground } from '@/components/ThemedBackground';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useTheme } from '@/theme/ThemeContext';
-import { Level, LEVEL_CONFIG } from '@/puzzle/difficulty';
+import { Level } from '@/puzzle/difficulty';
 import { RewardPopup, RewardReason } from '@/components/RewardPopup';
 
 export default function CompletionModal() {
@@ -18,12 +18,7 @@ export default function CompletionModal() {
   const seconds = parseInt(time, 10);
   const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
   const secs = String(seconds % 60).padStart(2, '0');
-  const levelCode = LEVEL_CONFIG[level ?? 'easy'].code;
-
-  const nextPuzzleIndex = parseInt(puzzleId?.split('.')[1] ?? '1', 10) + 1;
-  const nextPuzzleId = `${levelCode}.${nextPuzzleIndex}`;
-
-  return (
+return (
     <ThemedBackground style={{ alignItems: 'center', justifyContent: 'center', padding: 32 }}>
       <Text style={{ fontSize: 40, marginBottom: 8 }}>🎉</Text>
       <Text style={{ fontSize: 28, fontWeight: '800', color: colors.text, marginBottom: 4 }}>Puzzle Complete!</Text>
@@ -34,7 +29,7 @@ export default function CompletionModal() {
 
       <TouchableOpacity
         style={{ backgroundColor: colors.primary, borderRadius: 14, padding: 16, width: '100%', alignItems: 'center', marginTop: 32, marginBottom: 12 }}
-        onPress={() => router.replace({ pathname: '/(tabs)/game', params: { level, puzzleId: nextPuzzleId } })}
+        onPress={() => router.replace({ pathname: '/(tabs)/game', params: { level } })}
       >
         <Text style={{ color: '#fff', fontSize: 16, fontWeight: '700' }}>Next Puzzle</Text>
       </TouchableOpacity>

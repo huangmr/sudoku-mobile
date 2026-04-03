@@ -72,7 +72,7 @@ export const Cell = memo(function Cell({
 
 const styles = StyleSheet.create({
   cell: { flex: 1, aspectRatio: 1, alignItems: 'center', justifyContent: 'center' },
-  text: { fontSize: 18 },
+  text: { fontSize: 18, includeFontPadding: false, textAlignVertical: 'center' },
   selectedOverlay: {
     position: 'absolute', inset: 1, borderWidth: 2, borderRadius: 2,
   },
