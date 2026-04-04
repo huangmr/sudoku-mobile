@@ -8,10 +8,10 @@ export const LEVEL_CONFIG: Record<Level, {
   timeMultiplier: number;
   baseScore: number;
 }> = {
-  easy:   { code: 1, cluesTarget: 35, timeLimitSeconds: 900,  timeMultiplier: 2, baseScore: 1000 },
-  medium: { code: 2, cluesTarget: 27, timeLimitSeconds: 1320, timeMultiplier: 3, baseScore: 2000 },
-  hard:   { code: 3, cluesTarget: 22, timeLimitSeconds: 2100, timeMultiplier: 4, baseScore: 3000 },
-  horror: { code: 4, cluesTarget: 17, timeLimitSeconds: 3300, timeMultiplier: 5, baseScore: 4000 },
+  easy:   { code: 1, cluesTarget: 35, timeLimitSeconds: 1200, timeMultiplier: 2, baseScore: 1000 },
+  medium: { code: 2, cluesTarget: 27, timeLimitSeconds: 1800, timeMultiplier: 3, baseScore: 2000 },
+  hard:   { code: 3, cluesTarget: 22, timeLimitSeconds: 2400, timeMultiplier: 4, baseScore: 3000 },
+  horror: { code: 4, cluesTarget: 17, timeLimitSeconds: 3000, timeMultiplier: 5, baseScore: 4000 },
 };
 
 export function levelFromCode(code: number): Level {

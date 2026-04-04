@@ -26,7 +26,7 @@ describe('startGame', () => {
 
   test('sets timeLimit from level config', () => {
     loadEasyPuzzle();
-    expect(useGameStore.getState().timeLimit).toBe(900); // easy = 900s
+    expect(useGameStore.getState().timeLimit).toBe(1200); // easy = 1200s
   });
 
   test('preserves sessionLives across games', () => {
@@ -217,10 +217,10 @@ describe('tickTimer', () => {
 
   test('triggers gameover when time limit reached', () => {
     loadEasyPuzzle();
-    useGameStore.setState({ elapsedSeconds: 899, sessionLives: 5 });
+    useGameStore.setState({ elapsedSeconds: 1199, sessionLives: 5 });
     useGameStore.getState().tickTimer();
     expect(useGameStore.getState().status).toBe('gameover');
-    expect(useGameStore.getState().elapsedSeconds).toBe(900);
+    expect(useGameStore.getState().elapsedSeconds).toBe(1200);
     expect(useGameStore.getState().sessionLives).toBe(4);
   });
 
