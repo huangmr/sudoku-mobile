@@ -5,6 +5,7 @@ import { useLocalSearchParams, router } from 'expo-router';
 import { useTheme } from '@/theme/ThemeContext';
 import { Level } from '@/puzzle/difficulty';
 import { RewardPopup, RewardReason } from '@/components/RewardPopup';
+import { useGameStore } from '@/game/gameStore';
 
 export default function CompletionModal() {
   const { colors } = useTheme();
@@ -29,7 +30,7 @@ return (
 
       <TouchableOpacity
         style={{ backgroundColor: colors.primary, borderRadius: 14, padding: 16, width: '100%', alignItems: 'center', marginTop: 32, marginBottom: 12 }}
-        onPress={() => router.replace({ pathname: '/(tabs)/game', params: { level } })}
+        onPress={() => { useGameStore.getState().reset(); router.replace({ pathname: '/(tabs)/game', params: { level } }); }}
       >
         <Text style={{ color: '#fff', fontSize: 16, fontWeight: '700' }}>Next Puzzle</Text>
       </TouchableOpacity>

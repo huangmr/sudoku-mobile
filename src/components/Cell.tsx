@@ -9,10 +9,6 @@ type CellProps = {
   isHighlighted: boolean;
   isConflict: boolean;
   onPress: () => void;
-  boxBorderRight: boolean;
-  boxBorderBottom: boolean;
-  isLastCol: boolean;
-  isLastRow: boolean;
 };
 
 export const Cell = memo(function Cell({
@@ -22,10 +18,6 @@ export const Cell = memo(function Cell({
   isHighlighted,
   isConflict,
   onPress,
-  boxBorderRight,
-  boxBorderBottom,
-  isLastCol,
-  isLastRow,
 }: CellProps) {
   const { colors } = useTheme();
 
@@ -47,16 +39,7 @@ export const Cell = memo(function Cell({
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={isClue ? 1 : 0.7}
-      style={[
-        styles.cell,
-        {
-          backgroundColor: bgColor,
-          borderRightWidth: isLastCol ? 0 : boxBorderRight ? 2 : 1,
-          borderBottomWidth: isLastRow ? 0 : boxBorderBottom ? 2 : 1,
-          borderRightColor: boxBorderRight ? colors.borderStrong : colors.borderFaint,
-          borderBottomColor: boxBorderBottom ? colors.borderStrong : colors.borderFaint,
-        },
-      ]}
+      style={[styles.cell, { backgroundColor: bgColor }]}
     >
       {isSelected && (
         <View style={[styles.selectedOverlay, { borderColor: colors.cellSelectedBorder }]} pointerEvents="none" />
@@ -71,7 +54,7 @@ export const Cell = memo(function Cell({
 });
 
 const styles = StyleSheet.create({
-  cell: { flex: 1, aspectRatio: 1, alignItems: 'center', justifyContent: 'center' },
+  cell: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   text: { fontSize: 18, includeFontPadding: false, textAlignVertical: 'center' },
   selectedOverlay: {
     position: 'absolute', inset: 1, borderWidth: 2, borderRadius: 2,

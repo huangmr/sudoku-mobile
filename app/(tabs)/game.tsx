@@ -35,7 +35,6 @@ export default function GameScreen() {
   const { puzzle, status, elapsedSeconds, mistakes, startGame, pause, resume, reset, addLife } = useGameStore();
   const appStateRef = useRef(AppState.currentState);
   const { isLoggedIn, user, updateUser } = useAuthStore();
-  const handledCompletion = useRef(false);
   const { inputRef, onNativeKeyPress } = useKeyboardInput();
 
   useEffect(() => {
@@ -57,8 +56,7 @@ export default function GameScreen() {
   }, [pause, resume]);
 
   useEffect(() => {
-    if (status === 'completed' && !handledCompletion.current) {
-      handledCompletion.current = true;
+    if (status === 'completed') {
       handleCompletion();
     }
   }, [status]);
@@ -182,7 +180,7 @@ export default function GameScreen() {
   if (status === 'gameover') {
     return (
       <GameOverScreen
-        onRetry={() => { handledCompletion.current = false; puzzle && startGame(puzzle); }}
+        onRetry={() => { puzzle && startGame(puzzle); }}
         onHome={() => { reset(); router.replace('/(tabs)'); }}
       />
     );

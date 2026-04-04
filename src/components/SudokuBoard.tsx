@@ -4,8 +4,27 @@ import { Cell } from './Cell';
 import { useGameStore } from '@/game/gameStore';
 import { useTheme } from '@/theme/ThemeContext';
 
+function GridLines({ faint, strong }: { faint: string; strong: string }) {
+  return (
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
+      {[1, 2, 3, 4, 5, 6, 7, 8].map(i => {
+        const isBox = i % 3 === 0;
+        const thickness = isBox ? 2 : 1;
+        const color = isBox ? strong : faint;
+        const pct = `${(i / 9) * 100}%` as `${number}%`;
+        return (
+          <React.Fragment key={i}>
+            <View style={{ position: 'absolute', left: 0, right: 0, top: pct, height: thickness, backgroundColor: color }} />
+            <View style={{ position: 'absolute', top: 0, bottom: 0, left: pct, width: thickness, backgroundColor: color }} />
+          </React.Fragment>
+        );
+      })}
+    </View>
+  );
+}
+
 export function SudokuBoard() {
-  const { board, conflicts, selectedCell, puzzle, selectCell, status } = useGameStore();
+  const { board, conflicts, selectedCell, puzzle, selectCell } = useGameStore();
   const { colors } = useTheme();
 
   const isHighlighted = useCallback((r: number, c: number): boolean => {
@@ -31,14 +50,11 @@ export function SudokuBoard() {
               isHighlighted={!puzzle.clues[r][c] && isHighlighted(r, c)}
               isConflict={conflicts[r]?.[c] ?? false}
               onPress={() => selectCell(r, c)}
-              boxBorderRight={c === 2 || c === 5}
-              boxBorderBottom={r === 2 || r === 5}
-              isLastCol={c === 8}
-              isLastRow={r === 8}
             />
           ))}
         </View>
       ))}
+      <GridLines faint={colors.borderFaint} strong={colors.borderStrong} />
     </View>
   );
 }
