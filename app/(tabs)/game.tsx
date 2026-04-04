@@ -13,7 +13,7 @@ import { Timer } from '@/components/Timer';
 import { TimerBar } from '@/components/TimerBar';
 import { LivesDisplay } from '@/components/LivesDisplay';
 import { generatePuzzle } from '@/puzzle/generator';
-import { Level, LEVEL_CONFIG, levelFromCode } from '@/puzzle/difficulty';
+import { Level, LEVEL_CONFIG } from '@/puzzle/difficulty';
 import { calculateScore } from '@/game/scoring';
 import { markGamePlayed, getPlayedGames } from '@/storage/playedGames';
 import { recordGuestPlay } from '@/storage/guestStreak';
@@ -64,6 +64,7 @@ export default function GameScreen() {
   }, [status]);
 
   async function loadPuzzle() {
+    reset(); // clear completed/gameover status immediately before async work
     const level: Level = (levelParam as Level) ?? 'easy';
     const played = await getPlayedGames();
 
