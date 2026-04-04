@@ -1,9 +1,13 @@
-import { apiClient } from './client';
+import { apiClient } from "./client";
 
 export async function registerPushToken(
   pushToken: string,
-  platform: 'ios' | 'android',
-  timezoneOffsetMinutes: number
+  platform: "ios" | "android",
+  timezoneOffsetMinutes: number,
 ): Promise<void> {
-  await apiClient.post('/devices/token', { pushToken, platform, timezoneOffsetMinutes });
+  await apiClient.post("/devices/token", {
+    pushToken,
+    platform,
+    timezoneOffsetMinutes,
+  });
 }

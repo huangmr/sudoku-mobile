@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const KEY = 'played_games';
+const KEY = "played_games";
 
 export async function getPlayedGames(): Promise<Set<string>> {
   const raw = await AsyncStorage.getItem(KEY);
@@ -16,6 +16,6 @@ export async function markGamePlayed(puzzleId: string): Promise<void> {
 
 export async function mergePlayedGames(ids: string[]): Promise<void> {
   const played = await getPlayedGames();
-  ids.forEach(id => played.add(id));
+  ids.forEach((id) => played.add(id));
   await AsyncStorage.setItem(KEY, JSON.stringify([...played]));
 }

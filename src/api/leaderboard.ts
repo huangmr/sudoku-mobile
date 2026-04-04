@@ -1,4 +1,4 @@
-import { apiClient } from './client';
+import { apiClient } from "./client";
 
 export type LeaderboardEntry = {
   rank: number;
@@ -11,11 +11,11 @@ export type LeaderboardEntry = {
 };
 
 export async function getDailyLeaderboard(): Promise<LeaderboardEntry[]> {
-  const res = await apiClient.get('/leaderboard/daily');
+  const res = await apiClient.get("/leaderboard/daily");
   return res.data;
 }
 
 export async function getAllTimeLeaderboard(): Promise<LeaderboardEntry[]> {
-  const res = await apiClient.get('/leaderboard/alltime');
+  const res = await apiClient.get("/leaderboard/alltime");
   return res.data;
 }

@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { create } from "zustand";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type User = {
   id: string;
@@ -24,16 +24,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   isLoggedIn: false,
 
   setAuth: (user, jwt) => {
-    AsyncStorage.setItem('jwt', jwt);
+    AsyncStorage.setItem("jwt", jwt);
     set({ user, jwt, isLoggedIn: true });
   },
 
   logout: () => {
-    AsyncStorage.removeItem('jwt');
+    AsyncStorage.removeItem("jwt");
     set({ user: null, jwt: null, isLoggedIn: false });
   },
 
-  updateUser: (partial) => set(s => ({
-    user: s.user ? { ...s.user, ...partial } : s.user,
-  })),
+  updateUser: (partial) =>
+    set((s) => ({
+      user: s.user ? { ...s.user, ...partial } : s.user,
+    })),
 }));

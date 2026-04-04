@@ -1,4 +1,4 @@
-import { apiClient } from './client';
+import { apiClient } from "./client";
 
 export type UserProfile = {
   id: string;
@@ -10,6 +10,6 @@ export type UserProfile = {
 };
 
 export async function getMe(): Promise<UserProfile> {
-  const res = await apiClient.get('/users/me');
+  const res = await apiClient.get("/users/me");
   return res.data;
 }

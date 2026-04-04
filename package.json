@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "tsc --noEmit"
+    "lint": "eslint . && tsc --noEmit"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
@@ -37,7 +37,13 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/react": "~19.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.0",
+    "@typescript-eslint/parser": "^8.58.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "jest": "^30.3.0",
+    "prettier": "^3.8.1",
     "ts-jest": "^29.4.9",
     "typescript": "~5.9.2"
   },

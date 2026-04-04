@@ -66,7 +66,7 @@ export default function WelcomeScreen() {
         console.error("Login failed", e);
       }
     })();
-  }, [response]);
+  }, [response, setAuth]);
 
   const playAsGuest = async () => {
     await AsyncStorage.setItem("has_seen_welcome", "true");

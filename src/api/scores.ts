@@ -1,4 +1,4 @@
-import { apiClient } from './client';
+import { apiClient } from "./client";
 
 export type SubmitScorePayload = {
   puzzleId: string;
@@ -9,6 +9,6 @@ export type SubmitScorePayload = {
 };
 
 export async function submitScore(payload: SubmitScorePayload) {
-  const res = await apiClient.post('/scores', payload);
+  const res = await apiClient.post("/scores", payload);
   return res.data;
 }

@@ -1,21 +1,39 @@
-import React, { useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Cell } from './Cell';
-import { useGameStore } from '@/game/gameStore';
-import { useTheme } from '@/theme/ThemeContext';
+import React, { useCallback } from "react";
+import { View, StyleSheet } from "react-native";
+import { Cell } from "./Cell";
+import { useGameStore } from "@/game/gameStore";
+import { useTheme } from "@/theme/ThemeContext";
 
 function GridLines({ faint, strong }: { faint: string; strong: string }) {
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
-      {[1, 2, 3, 4, 5, 6, 7, 8].map(i => {
+      {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => {
         const isBox = i % 3 === 0;
         const thickness = isBox ? 2 : 1;
         const color = isBox ? strong : faint;
         const pct = `${(i / 9) * 100}%` as `${number}%`;
         return (
           <React.Fragment key={i}>
-            <View style={{ position: 'absolute', left: 0, right: 0, top: pct, height: thickness, backgroundColor: color }} />
-            <View style={{ position: 'absolute', top: 0, bottom: 0, left: pct, width: thickness, backgroundColor: color }} />
+            <View
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: pct,
+                height: thickness,
+                backgroundColor: color,
+              }}
+            />
+            <View
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: pct,
+                width: thickness,
+                backgroundColor: color,
+              }}
+            />
           </React.Fragment>
         );
       })}
@@ -27,18 +45,30 @@ export function SudokuBoard() {
   const { board, conflicts, selectedCell, puzzle, selectCell } = useGameStore();
   const { colors } = useTheme();
 
-  const isHighlighted = useCallback((r: number, c: number): boolean => {
-    if (!selectedCell) return false;
-    const [sr, sc] = selectedCell;
-    if (r === sr || c === sc) return true;
-    if (Math.floor(r / 3) === Math.floor(sr / 3) && Math.floor(c / 3) === Math.floor(sc / 3)) return true;
-    return false;
-  }, [selectedCell]);
+  const isHighlighted = useCallback(
+    (r: number, c: number): boolean => {
+      if (!selectedCell) return false;
+      const [sr, sc] = selectedCell;
+      if (r === sr || c === sc) return true;
+      if (
+        Math.floor(r / 3) === Math.floor(sr / 3) &&
+        Math.floor(c / 3) === Math.floor(sc / 3)
+      )
+        return true;
+      return false;
+    },
+    [selectedCell],
+  );
 
   if (!puzzle || board.length === 0) return null;
 
   return (
-    <View style={[styles.board, { borderWidth: 2, borderColor: colors.borderStrong }]}>
+    <View
+      style={[
+        styles.board,
+        { borderWidth: 2, borderColor: colors.borderStrong },
+      ]}
+    >
       {board.map((row, r) => (
         <View key={r} style={styles.row}>
           {row.map((val, c) => (
@@ -60,6 +90,6 @@ export function SudokuBoard() {
 }
 
 const styles = StyleSheet.create({
-  board: { width: '100%', aspectRatio: 1 },
-  row: { flex: 1, flexDirection: 'row' },
+  board: { width: "100%", aspectRatio: 1 },
+  row: { flex: 1, flexDirection: "row" },
 });

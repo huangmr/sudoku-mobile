@@ -1,11 +1,13 @@
-import { Board } from '@/puzzle/solver';
+import { Board } from "@/puzzle/solver";
 
 /**
  * Returns a 9×9 boolean grid where true = cell is in conflict
  * (duplicate in row, column, or 3×3 box)
  */
 export function computeConflicts(board: Board): boolean[][] {
-  const conflicts: boolean[][] = Array.from({ length: 9 }, () => Array(9).fill(false));
+  const conflicts: boolean[][] = Array.from({ length: 9 }, () =>
+    Array(9).fill(false),
+  );
 
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
@@ -53,6 +55,11 @@ export function isBoardComplete(board: Board, solution: Board): boolean {
 }
 
 /** Returns true when the value placed at (row, col) conflicts with the solution */
-export function isWrongEntry(board: Board, solution: Board, row: number, col: number): boolean {
+export function isWrongEntry(
+  board: Board,
+  solution: Board,
+  row: number,
+  col: number,
+): boolean {
   return board[row][col] !== 0 && board[row][col] !== solution[row][col];
 }

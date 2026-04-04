@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
-import { useTheme } from '@/theme/ThemeContext';
+import React, { memo } from "react";
+import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
+import { useTheme } from "@/theme/ThemeContext";
 
 type CellProps = {
   value: number;
@@ -24,16 +24,16 @@ export const Cell = memo(function Cell({
   const bgColor = isSelected
     ? colors.cellSelected
     : isConflict
-    ? colors.cellConflict
-    : isHighlighted
-    ? colors.cellHighlight
-    : colors.surface;
+      ? colors.cellConflict
+      : isHighlighted
+        ? colors.cellHighlight
+        : colors.surface;
 
   const textColor = isConflict
     ? colors.cellConflictText
     : isClue
-    ? colors.cellClue
-    : colors.cellUser;
+      ? colors.cellClue
+      : colors.cellUser;
 
   return (
     <TouchableOpacity
@@ -42,10 +42,21 @@ export const Cell = memo(function Cell({
       style={[styles.cell, { backgroundColor: bgColor }]}
     >
       {isSelected && (
-        <View style={[styles.selectedOverlay, { borderColor: colors.cellSelectedBorder }]} pointerEvents="none" />
+        <View
+          style={[
+            styles.selectedOverlay,
+            { borderColor: colors.cellSelectedBorder },
+          ]}
+          pointerEvents="none"
+        />
       )}
       {value !== 0 && (
-        <Text style={[styles.text, { color: textColor, fontWeight: isClue ? '700' : '500' }]}>
+        <Text
+          style={[
+            styles.text,
+            { color: textColor, fontWeight: isClue ? "700" : "500" },
+          ]}
+        >
           {value}
         </Text>
       )}
@@ -54,9 +65,16 @@ export const Cell = memo(function Cell({
 });
 
 const styles = StyleSheet.create({
-  cell: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  text: { fontSize: 18, includeFontPadding: false, textAlignVertical: 'center' },
+  cell: { flex: 1, alignItems: "center", justifyContent: "center" },
+  text: {
+    fontSize: 18,
+    includeFontPadding: false,
+    textAlignVertical: "center",
+  },
   selectedOverlay: {
-    position: 'absolute', inset: 1, borderWidth: 2, borderRadius: 2,
+    position: "absolute",
+    inset: 1,
+    borderWidth: 2,
+    borderRadius: 2,
   },
 });

@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const KEY = 'guest_streak';
+const KEY = "guest_streak";
 
 type StreakData = {
   currentStreak: number;
@@ -8,7 +8,7 @@ type StreakData = {
 };
 
 function today(): string {
-  return new Date().toISOString().split('T')[0];
+  return new Date().toISOString().split("T")[0];
 }
 
 export async function getGuestStreak(): Promise<StreakData> {
@@ -25,11 +25,10 @@ export async function recordGuestPlay(): Promise<StreakData> {
 
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayStr = yesterday.toISOString().split('T')[0];
+  const yesterdayStr = yesterday.toISOString().split("T")[0];
 
-  let newStreak = data.lastPlayedDate === yesterdayStr
-    ? data.currentStreak + 1
-    : 1;
+  let newStreak =
+    data.lastPlayedDate === yesterdayStr ? data.currentStreak + 1 : 1;
 
   if (newStreak > 7) newStreak = 0;
 

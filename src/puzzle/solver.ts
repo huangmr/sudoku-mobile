@@ -23,7 +23,7 @@ function isValid(board: Board, row: number, col: number, num: number): boolean {
  * Returns the number of solutions found (stops at 2 to check uniqueness).
  */
 export function countSolutions(board: Board, limit = 2): number {
-  const clone: Board = board.map(r => [...r]);
+  const clone: Board = board.map((r) => [...r]);
   let count = 0;
 
   function solve(): boolean {

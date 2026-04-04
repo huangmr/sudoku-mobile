@@ -1,6 +1,6 @@
-import { seededRandom } from './prng';
-import { fillSolution, hasUniqueSolution, Board } from './solver';
-import { Level, LEVEL_CONFIG } from './difficulty';
+import { seededRandom } from "./prng";
+import { fillSolution, hasUniqueSolution, Board } from "./solver";
+import { Level, LEVEL_CONFIG } from "./difficulty";
 
 export type Puzzle = {
   puzzleId: string;
@@ -22,11 +22,10 @@ export function generatePuzzle(puzzleId: string, level: Level): Puzzle {
   fillSolution(solution, random);
 
   // Step 2: copy solution to working board, then remove cells
-  const board: Board = solution.map(r => [...r]);
+  const board: Board = solution.map((r) => [...r]);
   const positions: [number, number][] = [];
   for (let r = 0; r < 9; r++)
-    for (let c = 0; c < 9; c++)
-      positions.push([r, c]);
+    for (let c = 0; c < 9; c++) positions.push([r, c]);
 
   // Shuffle removal order
   const shuffled = shufflePositions(positions, random);
@@ -44,14 +43,14 @@ export function generatePuzzle(puzzleId: string, level: Level): Puzzle {
   }
 
   // Step 3: build clue mask
-  const clues: boolean[][] = board.map(row => row.map(cell => cell !== 0));
+  const clues: boolean[][] = board.map((row) => row.map((cell) => cell !== 0));
 
   return { puzzleId, level, board, solution, clues };
 }
 
 function shufflePositions(
   positions: [number, number][],
-  random: () => number
+  random: () => number,
 ): [number, number][] {
   const a = [...positions];
   for (let i = a.length - 1; i > 0; i--) {
